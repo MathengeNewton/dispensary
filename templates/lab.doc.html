@@ -55,14 +55,14 @@
                             <i class="fas fa-align-center"></i>
                             <p>Active Session</p>
                         </a>
-                    </li>
-                    <li class="active">
+                   </li>
+                    <li class="">
                         <a href="/doctor/search-patient">
                             <i class="fas fa-align-center"></i>
                             <p>Patient search</p>
                         </a>
                     </li>
-                    <li class="">
+                    <li class="active">
                         <a href="/lab-session">
                             <i class="fas fa-align-center"></i>
                             <p>Lab Session</p>
@@ -110,89 +110,42 @@
 
 
 </div> -->
-<div class="content" >
+<div class="content">
     <div class="row">
         <div class="col-md-12">
             <div class="card demo-icons" style="background-color:whitesmoke !important">
                 <div class="card-header">
-                    <h5 class="card-title">search patient</h5>
-
-                    <div class="form-group">
-                        {% with messages = get_flashed_messages(with_categories=true) %}
-                        {% if messages %}
-                        {% for category, message in messages %}
-                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                            <span>{{ message }}</span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                    <h5 class="card-title">Lab Session</h5>                    
+                </div>                
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="">
+                                    <form action="/send-test" method="POST" enctype="multipart/form-data"
+                                        class="shadow-md">
+                                        <label class="text-monospace text-danger" for="description"
+                                         style="color:black !important;text-transform: uppercase !important;">
+                                            What tests do you want done? </label>                                        
+                                        <div class="form-group col-10">
+                                            <label class="text-monospace text-danger" for="description">
+                                                Symptoms</label>
+                                                <textarea required id='symptoms' name="symptoms"
+                                                class="form-control border" cols="40" rows="7"></textarea>
+                                        </div>
+                                        <div class="form-group col-10">
+                                            <label for="bid" class="text-monospace text-danger">
+                                                Tests
+                                            </label>
+                                            <textarea required id='tests' name="tests"
+                                                class="form-control border" cols="40" rows="7"></textarea>
+                                        </div>                                        
+                                        <button type="submit" style="text-transform: none !important;"
+                                        class="btn btn-outline-success">request test </button>
+                                    </form>                                    
+                                </div>
+                            </div>
                         </div>
-                        {% endfor %}
-                        {% endif %}
-                        {% endwith %}
-                    </div>
-                </div>
-                <div class="card-body all-icons">
-                    <div id="icons-wrapper">
-                        <div class="table-responsive">
-                            <table class="table" id="myTable">
-                                <thead class="text-primary">
-                                    <th>name</th>
-                                    <th>age</th>
-                                    <th>gender</th>
-                                    <th>last visit</th>
-                                    <th>session</th>
-                                </thead>
-                                <tbody>
-                                    {% for each in allr %}
-                                    <tr>
-                                        <td>{{ each.name }}</td>
-                                        <td>{{ each.age }}</td>
-                                        <td>{{ each.gender }}</td>
-                                        <td>{{ each.lastvisit }}</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-warning" data-toggle="modal"
-                                                data-target="#update{{ each.id }}">{{session}} </button>
-                                            <!-- add new product modal -->
-                                            <div class="modal fade" id="update{{ each.id }}" tabindex="-1"
-                                                role="dialog" aria-labelledby="exampleModalLabel"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">
-                                                                Update session</h5>
-                                                            <button type="button" class="close"
-                                                                data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <form action="/patient/status/{{ each.id }}"
-                                                                method="POST">
-
-                                                                <!-- <div class="form-group">
-                                                                    <label for="newstatus">Status</label>
-                                                                    <input type="text" class="form-control"
-                                                                        name="newstatus">
-                                                                </div> -->
-                                                                <div class="form-group">
-                                                                    <button type="submit"
-                                                                        class="btn btn-success btn-md">{{status}}</button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>                                       
-                                        {% endfor %}
-                                </tbody>
-
-                            </table>
-                        </div>
-
                     </div>
                 </div>
             </div>

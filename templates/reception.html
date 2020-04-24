@@ -140,16 +140,14 @@
                                     <th>session</th>
                                 </thead>
                                 <tbody>
-                                    {% for each in session %}
-                                    {% for item in each %}
+                                    {% for each in session %}                                    
                                     <tr>
-                                        <td>{{ item.name }}</td>
-                                        <td>{{ item.age }}</td>
-                                        <td>{{ item.gender }}</td>
-                                        <td>{{ lastvisit }}</td>
-                                        <td>{{ sessionstatus }}
-                                        </td>                                       
-                                        {% endfor %}
+                                        <td>{{ each.name }}</td>
+                                        <td>{{ each.age }}</td>
+                                        <td>{{ each.gender }}</td>
+                                        <td>{{ each.lastvisit }}</td>
+                                        <td>{{ each.sessionstatus }}
+                                        </td>                        
                                         {% endfor %}
                                 </tbody>
 

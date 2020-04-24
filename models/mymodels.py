@@ -24,7 +24,6 @@ class users(db.Model):
     @classmethod
     def validate_password(cls, email, password):
         customer = cls.query.filter_by(email=email).first()
-
         if customer and bcrypt.check_password_hash(customer.password, password):
             return True
         else:
@@ -39,6 +38,7 @@ class patients(db.Model):
     age = db.Column(db.Integer, nullable=False)
     gender = db.Column(db.String)
     condition = db.Column(db.String(200))
+   
 
 
     def insert_record(self):
@@ -59,11 +59,29 @@ class patients(db.Model):
 
     @classmethod
     def select_patient_by_name(cls,name):
-        return  cls.query.filter_by(name = name)
+        returns = cls.query.filter_by(name = name)
+        if returns:
+            return returns
+        else:
+            return False
     
     @classmethod
     def select_patient_by_id(cls,id):
-        return  cls.query.filter_by(id = id).first()
+        returns = cls.query.filter_by(id = id)
+        if returns:
+            return returns
+        else:
+            return False
+            
+          
+
+    @classmethod
+    def get_patient_name(cls,id):
+        patient = cls.query.filter_by(id = id).name
+        if patient:
+            return patient
+        else:
+            return False
 
 class medical_records(db.Model):
     id = db.Column(db.Integer, nullable=False,
@@ -92,7 +110,11 @@ class medical_records(db.Model):
     
     @classmethod
     def get_patient_record_by_id(cls, id):
-        return cls.query.filter_by(patient=id)
+        record =  cls.query.filter_by(patient=id)
+        if record:
+            return record
+        else:
+            return False
 
 
 class billing(db.Model):
@@ -245,7 +267,7 @@ class patient_session(db.Model):
 
     @classmethod
     def active_session(cls):
-        actives = cls.query.all()
+        actives = cls.query.filter_by(status = "active")
         return actives
 
     
@@ -257,3 +279,50 @@ class patient_session(db.Model):
             session.status = 'closed'
             db.session.commit()
             return True
+
+class tests(db.Model):
+    id = db.Column(db.Integer,autoincrement = True,primary_key=True)
+    patient = db.Column(db.Integer)
+    technician = db.Column(db.Integer)
+    date = db.Column(db.Date)
+    tests = db.Column(db.String(200))
+    results = db.Column(db.String(200))
+    deductions = db.Column(db.String(200))
+    status = db.Column(db.String,default = "pending")
+
+
+    def create_test(self):
+        self.session.add(self)
+        self.session.commit()
+
+    @classmethod
+    def view_tests_by_status(cls,status):
+        return cls.query.filter_by(status = status)
+
+    @classmethod
+    def view_tests_by_patient(cls,patient):
+        return cls.query.filter_by(patient = patient)
+
+    @classmethod
+    def view_tests_by_tests(cls,tests):
+        return cls.query.filter_by(tests = tests)
+
+    @classmethod
+    def view_tests_by_date(cls,date):
+        return cld.query.filter_by(date = date)
+
+    @classmethod
+    def view_tests_by_deductions(cls,deductions):
+        return cld.query.filter_by(deductions = deductions)
+
+    @classmethod
+    def update_tests_by_id(cls,id):
+        test = cls.query.filter_by(id = id).first()
+        if test:
+            newstatus = "closed"
+            test.status = newstatus
+            db.session.commit()
+            return True
+        else:
+            return False
+        

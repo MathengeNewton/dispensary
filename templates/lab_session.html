@@ -32,7 +32,7 @@
 
 <body class="">
     <div class="wrapper ">
-        <div class="sidebar" data-color="blue" data-active-color="danger">
+        <div class="sidebar" data-color="white" data-active-color="danger">
             <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
@@ -51,7 +51,7 @@
                         </a>
                     </li>                 
                     <li class="active">
-                        <a href="/lab">
+                        <a href="/lab/home">
                             <i class="fas fa-align-center"></i>
                             <p>Tests</p>
                         </a>
@@ -124,18 +124,22 @@
                         <div class="table-responsive">
                             <table class="table" >
                                 <thead class="text-primary">
-                                    <th>name</th>
-                                    <th>payment mode</th>
+                                    <th>date</th>
+                                    <th>{{ space }}</th>
+                                    <th>{{ space }}</th>
                                     <th>underlying condition</th>
                                     <th>requested test</th>
                                 </thead>
                                 <tbody>
-                                    {% for each in patient %}
+                                    {% for each in test %}
                                     <tr>
-                                        <td>{{ each.name }}</td>
-                                        <td>{{ each.p_mode }}</td>
-                                        <td>{{ each.condition }}</td>
-                                        <td>{{ reqquestedtest }}</td>
+                                        <td>{{ each.date }}</td>
+                                        <td>{{ message }}</td>
+                                        <td>{{ message }}</td>
+                                        {% for con in mycon %}
+                                        <td>{{ con.condition }}</td>
+                                        {% endfor %}
+                                        <td>{{ each.test }}</td>
                                         <td></td>
                                     </tr>                                      
                                     {% endfor %}

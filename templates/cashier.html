@@ -44,14 +44,14 @@
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">                    
-                    <li class="active">
-                        <a href="/cashier">
+                    <li class="">
+                        <a href="/cashier/home">
                             <i class="fas fa-align-center"></i>
                             <p>check out</p>
                         </a>
                     </li>
-                    <li class="">
-                        <a href="/transactions">
+                    <li class="active">
+                        <a href="/cashier/transactions">
                             <i class="fas fa-align-center"></i>
                             <p>Transactions</p>
                         </a>
@@ -125,17 +125,21 @@
                             <table class="table" >
                                 <thead class="text-primary">
                                     <th>name</th>
-                                    <th>payment mode</th>
+                                    <th>{{ some_name}}</th>
+                                    <th>{{ some_name}}</th>
                                     <th>bill amount</th>
                                     <th>payment status</th>
                                 </thead>
                                 <tbody>
                                     {% for each in patient %}
                                     <tr>
-                                        <td>{{ each.name }}</td>
-                                        <td>{{ each.p_mode }}</td>
-                                        <td>{{ bill }}</td>
-                                        <td>{{ status }}</td>
+                                        {% for pname in patientname %}
+                                        <td>{{ pname.name }}</td>
+                                        {% endfor %}
+                                        <td>{{some_value }}</td>
+                                        <td>{{some_value }}</td>
+                                        <td>{{ each.bill }}</td>
+                                        <td>{{ eac.status }}</td>
                                         <td></td>
                                     </tr>                                      
                                     {% endfor %}

@@ -44,14 +44,14 @@
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">                    
-                    <li class="">
-                        <a href="/cashier">
+                    <li class="active">
+                        <a href="/cashier/home">
                             <i class="fas fa-align-center"></i>
                             <p>check out</p>
                         </a>
                     </li>
-                    <li class="active">
-                        <a href="/transactions">
+                    <li class="">
+                        <a href="/cashier/transactions">
                             <i class="fas fa-align-center"></i>
                             <p>Transactions</p>
                         </a>
@@ -125,19 +125,50 @@
                         <div class="table-responsive">
                             <table class="table" id="myTable">
                                 <thead class="text-primary">
-                                    <th>patient id</th>
+                                    <th>patient</th>
                                     <th>date</th>
                                     <th>amount</th>
-                                    <th>Mode of Payment</th>
+                                    <th>option</th>
                                 </thead>
                                 <tbody>
-                                    {% for each in allr %}
+                                    {% for each in transactions %}
                                     <tr>
-                                        <td>{{ each.p_id }}</td>
+                                        {% for each in patient %}
+                                        <td>{{ patient.name }}</td>
+                                        {% endfor %}                                    
                                         <td>{{ each.date }}</td>
-                                        <td>{{ each.amount }}</td>
-                                        <td>{{ each.mode }}</td>
-                                    </tr>                                       
+                                        <td>{{ each.bill }}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-warning" data-toggle="modal"
+                                                data-target="#update{{ each.id }}"> check out </button>
+                                            <!-- add new product modal -->
+                                            <div class="modal fade" id="update{{ each.id }}" tabindex="-1"
+                                                role="dialog" aria-labelledby="exampleModalLabel"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                                Payments</h5>
+                                                            <button type="button" class="close"
+                                                                data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="/cashier/transactions/{{ each.id }}"
+                                                                method="POST">
+                                                                <div class="form-group">
+                                                                    <button type="submit"
+                                                                        class="btn btn-success btn-md">confirm payment</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>                                      
                                     {% endfor %}
                                 </tbody>
                             </table>

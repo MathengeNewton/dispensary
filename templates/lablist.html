@@ -51,7 +51,7 @@
                         </a>
                     </li>                 
                     <li class="">
-                        <a href="/lab">
+                        <a href="/lab/home">
                             <i class="fas fa-align-center"></i>
                             <p>Tests</p>
                         </a>
@@ -103,24 +103,38 @@
         <div class="col-md-12">
             <div class="card demo-icons" style="background-color:whitesmoke !important">
                 <div class="card-header">
-                    <h5 class="card-title">Pending Tests</h5>                    
+                    <h5 class="card-title">Pending Tests</h5>
+                    <div class="form-group">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                        {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            <span>{{ message }}</span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                    </div>                    
                 </div>
                 <div class="card-body all-icons">
                     <div id="icons-wrapper">
                         <div class="table-responsive">
                             <table class="table" id="myTable">
                                 <thead class="text-primary">
-                                    <th>name</th>
-                                    <th>age</th>
-                                    <th>gender</th>
+                                    <th>id</th>
+                                    <th>test</th>
+                                    <th>date</th>
                                     <th>session</th>
                                 </thead>
                                 <tbody>
-                                    {% for each in allr %}
+                                    {% for each in tests %}
                                     <tr>
-                                        <td>{{ each.name }}</td>
-                                        <td>{{ each.age }}</td>
-                                        <td>{{ each.gender }}</td>
+                                        <td>{{ each.id }}</td>
+                                        <td>{{ each.test }}</td>
+                                        <td>{{ each.date }}</td>
                                         <td>
                                             <button class="btn btn-sm btn-warning" data-toggle="modal"
                                                 data-target="#update{{ each.id }}">{{session}} </button>

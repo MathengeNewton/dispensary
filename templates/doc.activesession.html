@@ -62,6 +62,12 @@
                             <p>Patient search</p>
                         </a>
                     </li>
+                    <li class="">
+                        <a href="/lab-session">
+                            <i class="fas fa-align-center"></i>
+                            <p>Lab Session</p>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -129,23 +135,20 @@
                     <div id="icons-wrapper">
                         <div class="table-responsive">
                             <table class="table" id="myTable" >
+                                <p>Previous Records</p>
                                 <thead class="text-primary">
-                                    <th>name</th>
-                                    <th>age</th>
-                                    <th>condition</th>
-                                    <th>last visit</th>
-                                    <th>last diagnosis</th>
+                                    <th>Diagnosis</th>
+                                    <th>Treatment</th>
+                                    <th>Date</th>
                                 </thead>
                                 <tbody>
-                                    {% for each in patient %}
+                                    {% for each in record %}
                                     <tr>
-                                        <td>{{ each.name }}</td>
-                                        <td>{{ each.age }}</td>
-                                        <td>{{ each.condition }}</td>
-                                        <td>{{ each.lastvisit }}</td>
-                                        <td>{{ last_diagnosis }}</td>
-                                    </tr>                                      
-                                    {% endfor %}
+                                        <td>{{ each.diagnosis }}</td>
+                                        <td>{{ each.treatment }}</td>
+                                        <td>{{ each.date }}</td>
+                                    </tr>   
+                                    {% endfor %}                              
                                 </tbody>
                             </table>
                         </div>
@@ -157,7 +160,8 @@
                         <div class="row justify-content-center">
                             <div class="col-md-8">
                                 <div class="">
-                                    <form action="/home" method="POST" enctype="multipart/form-data"
+                                    
+                                    <form action="/doctor/treatment" method="POST" enctype="multipart/form-data"
                                         class="shadow-md">
                                         <label class="text-monospace text-danger" for="description"
                                          style="color:black !important;text-transform: uppercase !important;">
@@ -177,23 +181,21 @@
                                         </div>
                                         <div class="form-group col-10">
                                             <label for="bid" class="text-monospace text-danger">
-                                                Recomendation
+                                                Deductions
                                             </label>
-                                            <textarea required id='recomendation' name="recomendation"
+                                            <textarea required id='deductions' name="deductions"
                                                 class="form-control border" cols="30" rows="7"></textarea>
                                         </div>
-
-                                        <div class="form-group">
-                                            <button type="submit" style="text-transform: none !important;"
-                                                class="btn btn-outline-success">Request Lab session</button>
-                                            <button type="submit" style="text-transform: none !important;"
-                                                class="btn btn-outline-success">Prescribe Medication</button>
-                                        </div>
                                         <button type="submit" style="text-transform: none !important;"
-                                                class="btn btn-outline-success">Other recomendations</button>
+                                        class="btn btn-outline-success">Proceed to treatment</button>
+                                        
                                     </form>
+                                    <form action="/lab-session" method="POST">
+                                        <button class="btn btn-sm btn-warning" data-toggle="modal"
+                                                data-target="#update">lab session </button>
+                                    </form>                                    
                                 </div>
-                            </div>
+                            </div>                            
                         </div>
                     </div>
                 </div>
